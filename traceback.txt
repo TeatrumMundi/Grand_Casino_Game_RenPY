@@ -1,0 +1,22 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 49, in script
+    jump main_menu
+ScriptError: could not find label 'main_menu'.
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 49, in script
+    jump main_menu
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\ast.py", line 1698, in execute
+    rv = renpy.game.script.lookup(target)
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\script.py", line 1103, in lookup
+    raise ScriptError("could not find label '%s'." % str(original))
+ScriptError: could not find label 'main_menu'.
+
+Windows-10-10.0.22631 AMD64
+Ren'Py 8.2.1.24030407
+Casino 1.0
+Thu May  9 17:57:54 2024

@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 43: expected statement.
-    roulette_color = 1
-                   ^
+File "game/script.rpy", line 89: expected statement.
+    roulette_lose:
+                 ^
 
 Ren'Py Version: Ren'Py 8.2.1.24030407
-Thu May  9 14:54:01 2024
+Thu May  9 17:49:45 2024
