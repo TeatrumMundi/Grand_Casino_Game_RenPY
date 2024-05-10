@@ -16,11 +16,8 @@ screen display_money():
 # The game starts here.
 label start:
 
-    # Show a background.
-    scene bg outcasino
-
-    #Welcome dialog
-    "Welcome to the Grand Casino. Would you like to enter?"
+    scene bg outcasino # Show a background.
+    "Welcome to the Grand Casino. Would you like to enter?" # Welcome dialog
     menu:
         "Yes, I do.":
             jump enter_yes
@@ -47,9 +44,12 @@ label game_choice:
         "Roulette":
             jump roulette
         "One Hand Bandit":
-            jump enter_no
+            jump slots
         "Quit Grand Casino":
             jump enter_no
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~roulette~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 label roulette:
     show screen display_money #refresh money
@@ -140,18 +140,36 @@ label roulette_win_green:
 label roulette_lose:
     "You lose! Good luck next time."
     jump roulette
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~roulette-end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~bandit~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+label slots:
+    show screen display_money #refresh money
+    hide rashim neutral # rashim hide
+    scene bg slots
 
+    if money <= 0:
+        jump casino_kick
 
+    python:
+        money_bet = renpy.input("How much do you want to bet?")
 
-
-
+    if money_bet.isdigit():
+        $ money_bet = int(money_bet)
+        $ money = money - money_bet
+    else:
+        "Chose correct number."
+        jump slots
 
 
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END SCRIPTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 label casino_kick:
-    
+    show screen display_money
+    scene bg incasino
+    with Dissolve(.5)
+    show rashim neutral
+    n "You lost all money get out!"
     return
 label enter_no:
     # This ends the game.
