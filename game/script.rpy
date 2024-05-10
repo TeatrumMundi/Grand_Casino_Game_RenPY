@@ -1,6 +1,21 @@
-﻿define n = Character("Rashim")
+﻿# Starting money value
+default money = 1000
+# Rashim variable
+define n = Character("Rashim")
+
+screen display_money():
+    frame:
+        xpadding 15
+        ypadding 15
+        xalign 0.0
+        yalign 0.0
+
+        vbox:
+            text "Your money: [money]$"
+
 # The game starts here.
 label start:
+
     # Show a background.
     scene bg outcasino
 
@@ -23,6 +38,7 @@ label enter_yes:
             jump under_18
 
 label game_choice:
+    show screen display_money
     scene bg incasino
     with Dissolve(.5)
     show rashim neutral
@@ -30,16 +46,29 @@ label game_choice:
     menu:
         "Roulette":
             jump roulette
-        "Poker":
-            jump enter_no
         "One Hand Bandit":
             jump enter_no
         "Quit Grand Casino":
             jump enter_no
 
 label roulette:
-    hide rashim neutral
+    show screen display_money #refresh money
+    hide rashim neutral # rashim hide
     scene bg roulette
+
+    if money <= 0:
+        jump casino_kick
+
+    python:
+        money_bet = renpy.input("How much do you want to bet?")
+
+    if money_bet.isdigit():
+        $ money_bet = int(money_bet)
+        $ money = money - money_bet
+    else:
+        "Chose correct number."
+        jump roulette
+
     with Dissolve(0.5)
     n "Choose color you want to bet on."
     menu:
@@ -50,6 +79,9 @@ label roulette:
         "Green":
             jump green
         "Go Back":
+            python:
+                money = money + int(money_bet)
+                money_bet = 0
             jump game_choice
 label black:
     $ roulette_color = 1
@@ -79,7 +111,7 @@ label roulette_spin:
     elif random_numer == 37:
         "Winner color is green!"
         if roulette_color == 3:
-            jump roulette_win
+            jump roulette_win_green
         else:
             jump roulette_lose
     else:
@@ -90,13 +122,37 @@ label roulette_spin:
             jump roulette_lose
 
 label roulette_win:
+    python:
+            money = money + (int(money_bet)*2)
+            money_bet = 0
+    show screen display_money #refresh money
     "You win! Congratulation."
     jump roulette
+label roulette_win_green:
+    python:
+            money = money + (int(money_bet)*14)
+            money_bet = 0
+    show screen display_money #refresh money
+    "You hit jackpot green! Congratulation."
+    jump roulette
+
 
 label roulette_lose:
     "You lose! Good luck next time."
     jump roulette
 
+
+
+
+
+
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END SCRIPTS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+label casino_kick:
+    
+    return
 label enter_no:
     # This ends the game.
     return

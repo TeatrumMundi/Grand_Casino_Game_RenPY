@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 89: expected statement.
-    roulette_lose:
-                 ^
+File "game/script.rpy", line 70: invalid syntax
+        renpy.jump roulette
+                    ^
 
 Ren'Py Version: Ren'Py 8.2.1.24030407
-Thu May  9 17:49:45 2024
+Fri May 10 12:43:14 2024
