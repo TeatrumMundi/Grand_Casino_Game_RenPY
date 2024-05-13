@@ -1,26 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 59, in script
+  File "game/script.rpy", line 82, in script
     python:
-  File "game/script.rpy", line 69, in <module>
-    renpy.say("Choose correct value.")
-TypeError: say() missing 1 required positional argument: 'what'
+  File "game/script.rpy", line 83, in <module>
+    money = money + int(money_bet)
+NameError: name 'money_bet' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 59, in script
+  File "game/script.rpy", line 82, in script
     python:
   File "C:\Users\Grocholx\Desktop\RenPY\renpy-8.2.1-sdk\renpy\ast.py", line 823, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
   File "C:\Users\Grocholx\Desktop\RenPY\renpy-8.2.1-sdk\renpy\python.py", line 1178, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "game/script.rpy", line 69, in <module>
-    renpy.say("Choose correct value.")
-TypeError: say() missing 1 required positional argument: 'what'
+  File "game/script.rpy", line 83, in <module>
+    money = money + int(money_bet)
+NameError: name 'money_bet' is not defined
 
 Windows-10-10.0.19045 AMD64
 Ren'Py 8.2.1.24030407
 Casino 1.0
-Fri May 10 12:47:08 2024
+Mon May 13 10:55:48 2024

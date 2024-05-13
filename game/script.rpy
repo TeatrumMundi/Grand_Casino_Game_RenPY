@@ -146,6 +146,16 @@ label slots:
     show screen display_money #refresh money
     hide rashim neutral # rashim hide
     scene bg slots
+    show 1_seven:
+        yalign 0.41
+        xalign 0.402
+    show 2_seven:
+        yalign 0.41
+        xalign 0.465
+    show 3_seven:
+        yalign 0.41
+        xalign 0.523
+
 
     if money <= 0:
         jump casino_kick
