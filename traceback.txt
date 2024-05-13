@@ -1,26 +1,67 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 82, in script
-    python:
-  File "game/script.rpy", line 83, in <module>
-    money = money + int(money_bet)
-NameError: name 'money_bet' is not defined
+  File "renpy/common/00start.rpy", line 211, in script call
+    call _gl_test
+  File "renpy/common/00gltest.rpy", line 388, in script
+    $ __gl_test()
+  File "renpy/common/00start.rpy", line 211, in script call
+    call _gl_test
+  File "renpy/common/00gltest.rpy", line 388, in script
+    $ __gl_test()
+  File "renpy/common/00gltest.rpy", line 388, in <module>
+    $ __gl_test()
+  File "renpy/common/00gltest.rpy", line 317, in _m1_00gltest__gl_test
+    _gl_performance_test()
+  File "renpy/common/00gltest.rpy", line 340, in _gl_performance_test
+    ui.interact(suppress_underlay=True, suppress_overlay=True)
+OSError: Couldn't find file 'gui/window_icon.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 82, in script
-    python:
-  File "C:\Users\Grocholx\Desktop\RenPY\renpy-8.2.1-sdk\renpy\ast.py", line 823, in execute
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\bootstrap.py", line 359, in bootstrap
+    renpy.main.main()
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\main.py", line 635, in main
+    run(restart)
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\main.py", line 145, in run
+    renpy.execution.run_context(True)
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\execution.py", line 955, in run_context
+    context.run()
+  File "renpy/common/00start.rpy", line 211, in script call
+    call _gl_test
+  File "renpy/common/00gltest.rpy", line 388, in script
+    $ __gl_test()
+  File "lib/python3.9/future/utils/__init__.py", line 444, in raise_
+  File "renpy/common/00start.rpy", line 211, in script call
+    call _gl_test
+  File "renpy/common/00gltest.rpy", line 388, in script
+    $ __gl_test()
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\ast.py", line 823, in execute
     renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "C:\Users\Grocholx\Desktop\RenPY\renpy-8.2.1-sdk\renpy\python.py", line 1178, in py_exec_bytecode
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\python.py", line 1178, in py_exec_bytecode
     exec(bytecode, globals, locals)
-  File "game/script.rpy", line 83, in <module>
-    money = money + int(money_bet)
-NameError: name 'money_bet' is not defined
+  File "renpy/common/00gltest.rpy", line 388, in <module>
+    $ __gl_test()
+  File "renpy/common/00gltest.rpy", line 317, in _m1_00gltest__gl_test
+    _gl_performance_test()
+  File "renpy/common/00gltest.rpy", line 340, in _gl_performance_test
+    ui.interact(suppress_underlay=True, suppress_overlay=True)
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\ui.py", line 301, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\display\core.py", line 2122, in interact
+    self.start()
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\display\core.py", line 983, in start
+    self.post_init()
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\display\core.py", line 1080, in post_init
+    self.set_icon()
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\display\core.py", line 1123, in set_icon
+    with renpy.loader.load(icon, directory="images") as f:
+  File "C:\Users\micha\Desktop\renpy-8.2.0-sdk\renpy\loader.py", line 672, in load
+    raise IOError("Couldn't find file '%s'." % name)
+OSError: Couldn't find file 'gui/window_icon.png'.
 
-Windows-10-10.0.19045 AMD64
+Windows-10-10.0.22631 AMD64
 Ren'Py 8.2.1.24030407
 Casino 1.0
-Mon May 13 10:55:48 2024
+Mon May 13 16:57:31 2024
