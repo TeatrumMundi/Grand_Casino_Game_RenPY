@@ -2,9 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 70: invalid syntax
-        renpy.jump roulette
-                    ^
+File "game/script.rpy", line 199: expected 'simple_expression' not found.
+    xalign: 0.80
+          ^
 
 Ren'Py Version: Ren'Py 8.2.1.24030407
-Fri May 10 12:43:14 2024
+Tue May 14 14:19:41 2024

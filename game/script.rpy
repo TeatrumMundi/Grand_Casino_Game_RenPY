@@ -2,8 +2,13 @@
 default money = 1000
 # Rashim variable
 define n = Character("Rashim")
+# slots image list
+default slots_icons = ["seven.png","bar.png", "banana.png"]
 
-screen display_money():
+init python:
+    import random
+
+screen display_money(): # money ui
     frame:
         xpadding 15
         ypadding 15
@@ -12,6 +17,52 @@ screen display_money():
 
         vbox:
             text "Your money: [money]$"
+
+label spin:
+    if persistent.counter < 10:
+        $ random_image_row1_indicator = renpy.random.randint(0, len(slots_icons)-1)
+        $ random_image_row2_indicator = renpy.random.randint(0, len(slots_icons)-1)
+        $ random_image_row3_indicator = renpy.random.randint(0, len(slots_icons)-1)
+
+        $ random_image_row1 = slots_icons[random_image_row1_indicator]
+        $ random_image_row2 = slots_icons[random_image_row2_indicator]
+        $ random_image_row3 = slots_icons[random_image_row3_indicator]
+
+        show expression Image("images/slots/" + random_image_row1):
+            yalign 0.41
+            xalign 0.402
+        show expression Image("images/slots/" + random_image_row2):
+            yalign 0.41
+            xalign 0.465
+        show expression Image("images/slots/" + random_image_row3):
+            yalign 0.41
+            xalign 0.523
+        pause(0.15) # pause between images
+
+        $ persistent.counter += 1
+
+        jump spin
+    else:
+        if random_image_row1 == random_image_row2 == random_image_row3:
+            "Congratulation you win!"
+            if random_image_row1_indicator == 0:
+                $ money = money + (int(money_bet)*100)
+                $ money_bet = 0
+            elif random_image_row1_indicator == 1:
+                $ money = money + (int(money_bet)*10)
+                $ money_bet = 0
+            elif random_image_row1_indicator == 2:
+                $ money = money + (int(money_bet)*5)
+                $ money_bet = 0
+        else:
+            "Yuo lost. Good luck next time."
+
+        # Reseting counter
+        $ persistent.counter = 0
+
+        return
+
+
 
 # The game starts here.
 label start:
@@ -143,29 +194,28 @@ label roulette_lose:
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~roulette-end~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~bandit~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 label slots:
-    python:
-        row1 = ['1_seven']
-
     show screen display_money #refresh money
     hide rashim neutral # rashim hide
     scene bg slots
-    show 1_seven:
-        yalign 0.41
-        xalign 0.402
-    show 2_seven:
-        yalign 0.41
-        xalign 0.465
-    show 3_seven:
-        yalign 0.41
-        xalign 0.523
+    show slots_rewards:
+        xalign 1.0
+        yalign 0.0
 
-
+label slots_next:
+    show screen display_money #refresh money
     if money <= 0:
         jump casino_kick
 
+    menu:
+        "Spin":
+            jump slots_next_2
+        "Go Back":
+            jump game_choice
+
+label slots_next_2:
+
     python:
         money_bet = renpy.input("How much do you want to bet?")
-
     if money_bet.isdigit():
         $ money_bet = int(money_bet)
         $ money = money - money_bet
@@ -173,6 +223,9 @@ label slots:
         "Chose correct number."
         jump slots
 
+    $ persistent.counter = 0
+    call spin
+    jump slots_next
 
 
 
